@@ -1,0 +1,187 @@
+[
+    {
+        "nome": "INGRESSANTE - REGULAR: NÃO HABILITADO AO ENADE 2018 EM RAZÃO DA NATUREZA DO PROJETO PEDAGÓGICO DO CURSO. DATA DA PROVA: 25/11/2018",
+        "periodo": "2018.2",
+        "mencao": "---"
+    },
+    {
+        "nome": "FÍSICA ZERO",
+        "periodo": "2018.1",
+        "mencao": "SR"
+    },
+    {
+        "nome": "FISICA GERAL 1",
+        "periodo": "2018.1",
+        "mencao": "SR"
+    },
+    {
+        "nome": "FISICA GERAL 1 EXPERIMENTAL",
+        "periodo": "2018.1",
+        "mencao": "SR"
+    },
+    {
+        "nome": "CÁLCULO 1",
+        "periodo": "2018.1",
+        "mencao": "SR"
+    },
+    {
+        "nome": "ALGORITMOS E PROGRAMAÇÃO DE COMPUTADORES",
+        "periodo": "2018.2",
+        "mencao": "SS"
+    },
+    {
+        "nome": "ENGENHARIA E AMBIENTE",
+        "periodo": "2018.2",
+        "mencao": "MS"
+    },
+    {
+        "nome": "INTRODUÇÃO À ENGENHARIA",
+        "periodo": "2018.2",
+        "mencao": "SS"
+    },
+    {
+        "nome": "DESENHO INDUSTRIAL ASSISTIDO POR COMPUTADOR",
+        "periodo": "2018.2",
+        "mencao": "MS"
+    },
+    {
+        "nome": "CÁLCULO 1",
+        "periodo": "2018.2",
+        "mencao": "SS"
+    },
+    {
+        "nome": "FISICA 1",
+        "periodo": "2019.",
+        "mencao": "SS"
+    },
+    {
+        "nome": "FISICA 1 EXPERIMENTAL",
+        "periodo": "2019.",
+        "mencao": "MS"
+    },
+    {
+        "nome": "MONITORIA",
+        "periodo": "2019.1",
+        "mencao": "-"
+    },
+    {
+        "nome": "DESENVOLVIMENTO DE SOFTWARE",
+        "periodo": "2019.1",
+        "mencao": "SS"
+    },
+    {
+        "nome": "ENGENHARIA ECONÔMICA",
+        "periodo": "2019.1",
+        "mencao": "-"
+    },
+    {
+        "nome": "PROBABILIDADE E ESTATÍSTICA APLICADO A ENGENHARIA",
+        "periodo": "2019.1",
+        "mencao": "MS"
+    },
+    {
+        "nome": "CÁLCULO 2",
+        "periodo": "2019.1",
+        "mencao": "MM"
+    },
+    {
+        "nome": "INTRODUCAO A ALGEBRA LINEAR",
+        "periodo": "2019.1",
+        "mencao": "MI"
+    },
+    {
+        "nome": "PROGRAMAÇÃO PARA COMPETIÇÕES",
+        "periodo": "2019.2",
+        "mencao": "MS"
+    },
+    {
+        "nome": "MATEMÁTICA DISCRETA 1",
+        "periodo": "2019.2",
+        "mencao": "MS"
+    },
+    {
+        "nome": "ENGENHARIA ECONÔMICA",
+        "periodo": "2019.2",
+        "mencao": "MM"
+    },
+    {
+        "nome": "ESTRUTURAS DE DADOS 1",
+        "periodo": "2019.2",
+        "mencao": "MM"
+    },
+    {
+        "nome": "ORIENTAÇÃO A OBJETOS",
+        "periodo": "2019.2",
+        "mencao": "SS"
+    },
+    {
+        "nome": "MÉTODOS NUMÉRICOS PARA ENGENHARIA",
+        "periodo": "2019.2",
+        "mencao": "MM"
+    },
+    {
+        "nome": "INTRODUCAO A ALGEBRA LINEAR",
+        "periodo": "2019.2",
+        "mencao": "MM"
+    },
+    {
+        "nome": "VIGILÂNCIA EPIDEMIOLÓGICA COMUNITÁRIA E PARTICIPATIVA",
+        "periodo": "2020.1",
+        "mencao": "SS"
+    },
+    {
+        "nome": "PESQUISA CIENTÍFICA EM GRANDES TEMAS 2 - COVID-19",
+        "periodo": "2020.1",
+        "mencao": "SS"
+    },
+    {
+        "nome": "TEORIA DE ELETRÔNICA DIGITAL 1",
+        "periodo": "2020.1",
+        "mencao": "MS"
+    },
+    {
+        "nome": "MATEMÁTICA DISCRETA 2",
+        "periodo": "2020.1",
+        "mencao": "MS"
+    },
+    {
+        "nome": "MÉTODOS DE DESENVOLVIMENTO DE SOFTWARE",
+        "periodo": "2020.1",
+        "mencao": "MS"
+    },
+    {
+        "nome": "GESTÃO DA PRODUÇÃO E QUALIDADE",
+        "periodo": "2020.1",
+        "mencao": "MS"
+    },
+    {
+        "nome": "COMPILADORES 1",
+        "periodo": "2020.2",
+        "mencao": "-"
+    },
+    {
+        "nome": "ESTRUTURAS DE DADOS 2",
+        "periodo": "2020.2",
+        "mencao": "-"
+    },
+    {
+        "nome": "PRÁTICA DE ELETRÔNICA DIGITAL 1",
+        "periodo": "2020.2",
+        "mencao": "-"
+    },
+    {
+        "nome": "PROJETO DE ALGORITMOS",
+        "periodo": "2020.2",
+        "mencao": "-"
+    },
+    {
+        "nome": "REQUISITOS DE SOFTWARE",
+        "periodo": "2020.2",
+        "mencao": "-"
+    },
+    {
+        "nome": "INTERAÇÃO HUMANO COMPUTADOR",
+        "periodo": "2020.2",
+        "mencao": "-"
+    }
+]
