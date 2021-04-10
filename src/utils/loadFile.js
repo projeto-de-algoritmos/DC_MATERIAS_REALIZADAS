@@ -22,7 +22,7 @@ const coords = {
 const mencoesOptions = ['SR', 'II', 'MI', 'MM', 'MS', 'SS', '-', '---']
 
 export const loadFile = () => {
-    return pdfExtract.extract('./src/assets/historico1.pdf', {}, (err, data) => {
+    return pdfExtract.extract('./src/assets/js/historico1.pdf', {}, (err, data) => {
         if (err) return console.log(err);
         try {
             const materias = []
