@@ -23,6 +23,18 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 npm ou yarn
 
 ## Como rodar
+1) Navegue até a pasta frontend e rode
+```
+npm install
+npm start
+```
+ou
+```
+yarn
+yarn start
+```
+
+2) Abra outro terminal e navegue até a pasta backend e rode
 ```
 npm install
 npm start
