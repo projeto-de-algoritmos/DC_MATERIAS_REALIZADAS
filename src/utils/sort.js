@@ -1,4 +1,4 @@
-const historico = require('../assets/historico.json')
+const historico = require('../assets/json/historico_default.json')
 
 const filters = {
     nome: function sortByName(a, b) {

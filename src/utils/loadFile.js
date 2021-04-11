@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs'
 const PDFExtract = require('pdf.js-extract').PDFExtract
 const pdfExtract = new PDFExtract()
 
@@ -21,8 +21,14 @@ const coords = {
 
 const mencoesOptions = ['SR', 'II', 'MI', 'MM', 'MS', 'SS', '-', '---']
 
-export const loadFile = () => {
-    return pdfExtract.extract('./src/assets/js/historico1.pdf', {}, (err, data) => {
+export const loadFile = (base64) => {
+    const file = '../assets/pdf/historico.pdf'
+
+    fs.writeFile(file, base64, 'base64', (err) => {
+        if (err) console.log("Save doc failed. " + err)
+    })
+
+    return pdfExtract.extract(file, {}, (err, data) => {
         if (err) return console.log(err);
         try {
             const materias = []
@@ -51,7 +57,7 @@ export const loadFile = () => {
                     materias.push({ nome: nomes[i].str, periodo: periodos[i].str, mencao: mencoes[i].str })
                 }
             }
-            fs.writeFile('./src/assets/historico.json', JSON.stringify(materias), function (err) {
+            fs.writeFile('./src/assets/json/historico.json', JSON.stringify(materias), function (err) {
                 if (err) throw err;
                 console.log('Arquivo Salvo!');
             });
