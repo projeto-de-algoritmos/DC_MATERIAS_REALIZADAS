@@ -41,7 +41,10 @@ const mergeSort = (a, filter) => {
     return _mergeArrays(sorted_l, sorted_r, filter)
 }
 
-export const sort = (filter) => {
-    const sortedHistorico = mergeSort(historico, filter)
-    console.log(sortedHistorico)
+export const sort = (disciplinas, filter) => {
+    if (!disciplinas) {
+        disciplinas = historico
+    }
+    const sortedDisciplinas = mergeSort(disciplinas, filter)
+    return sortedDisciplinas
 }
