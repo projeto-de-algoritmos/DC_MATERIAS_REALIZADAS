@@ -50,7 +50,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100% - 68px);
+  min-height: calc(100% - 68px);
 }
 .page .central {
   margin-top: -68px;
@@ -84,6 +84,10 @@ button {
   text-align: center;
   margin-top: 30px;
 }
+.upload-area .method {
+  display: flex;
+  justify-content: center;
+}
 
 .inputfile {
   width: 0.1px;
@@ -116,13 +120,16 @@ button {
 }
 
 .inputfile-2 {
+  height: 182px;
+  width: 312px;
   font-weight: 700;
-  border: 3px dashed #3454f5;
-  background-color: #ffffff;
+  background: #ffffff url("./assets/img/dashed.png") no-repeat center;
+  background-size: contain;
   border-radius: 25px;
   box-shadow: 0px 4px 20px rgb(52 84 245 / 25%);
-  display: inline-block;
-  padding: 35px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   cursor: move;
 }
 .inputfile-2 img {
@@ -134,7 +141,8 @@ button {
 .inputfile-2.true,
 .inputfile-2:hover,
 .inputfile-2:focus {
-  border: 3px dashed #e4347f;
+  background: #ffffff url("./assets/img/dashed-hover.png") no-repeat center;
+  background-size: contain;
   box-shadow: 0px 4px 20px rgb(228 52 127 / 25%);
 }
 
@@ -147,7 +155,6 @@ button {
   z-index: 100;
   opacity: 0;
   visibility: hidden;
-  transition: 0.4s;
 }
 .modal-overlay.true {
   opacity: 1;
@@ -163,7 +170,6 @@ button {
   left: 50%;
   top: 0%;
   transform: translateX(-50%);
-  transition: 0.4s;
 }
 .modal-overlay.true .modal {
   top: 30%;
@@ -184,7 +190,6 @@ button {
 }
 .modal svg {
   cursor: pointer;
-  transition: 0.4s;
 }
 .modal svg:hover {
   color: #e4347f !important;

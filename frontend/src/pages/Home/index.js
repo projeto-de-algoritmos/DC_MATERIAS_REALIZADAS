@@ -46,7 +46,7 @@ const Home = () => {
         setIsLoaded(true)
         setDescription('Histórico carregado:')
       } else {
-        alert('Certifique se que o backend foi iniciado.')
+        alert('Erro com o backend.')
       }
     }
   }, [filter])
@@ -96,11 +96,11 @@ const Home = () => {
       dropFile.addEventListener('dragover', handleDrag)
       dropFile.addEventListener('drop', handleDrop)
 
-      setDescription('Carregue seu histórico escolar do SIGAA')
+      setDescription('Carregue seu histórico escolar do SIGAA:')
       setDropText('Arraste o documento aqui')
     }
 
-    const modal = parseInt(localStorage.getItem('modal')) ? false : true
+    const modal = localStorage.getItem('modal') ? false : true
     setIsModal(modal)
   }, [handleDrag, handleDrop])
 
@@ -221,7 +221,7 @@ const Home = () => {
               uma aplicação prática do algoritmo MergeSort (Dividir e 
               Conquistar). <br /><br />
               Seu histórico é salvo apenas localmente e <b>não é 
-              compartilhado por ninguém.</b>
+              compartilhado por ninguém</b>.
             </p>
           </div>
         </div>
