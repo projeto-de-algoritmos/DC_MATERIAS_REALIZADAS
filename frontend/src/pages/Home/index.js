@@ -1,81 +1,194 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
+import caretDownFilled from '@iconify/icons-ant-design/caret-down-filled'
+import caretUpFilled from '@iconify/icons-ant-design/caret-up-filled'
+import { Icon } from '@iconify/react'
+
+import { sendHistory } from '../../utils/historyAPI'
+import { sort } from '../../utils/sort'
 
 import logoPNG from '../../assets/img/logo.png'
 import pdfPNG from '../../assets/img/pdf.png'
-
-import { loadFile } from '../../utils/loadFile'
-
 import '../../assets/css/table.css'
 
 const Home = () => {
-    const [file, setFile] = useState('')
+  const dropArea = useRef()
 
-    const getBase64 = (e) => {
-        const file = e.target.files[0]
+  const [description, setDescription] = useState('')
+  const [dropText, setDropText] = useState('')
 
-        let reader = new FileReader()
-        reader.readAsBinaryString(file)
-        reader.onload = () => {
-            console.log(reader.result)
-            loadFile(reader.result)
-            // loadFile(file)
-            // setFile(reader.result)
-            // console.log(reader.result)
-        };
-        reader.onerror = function (error) {
-            console.log('Error: ', error);
-        }
+  const [filter, setFilter] = useState('nome')
+  const [disciplinas, setDisciplinas] = useState([])
+  const [numDisciplinas, setNumDisciplinas] = useState(0)
+
+  const [isDragging, setIsDragging] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  const getHistoryResults = useCallback((file) => {
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+
+    reader.onerror = (error) => {
+      console.log('Error: ', error)
     }
 
-    return (
-        <div className='container'>
-            {/* header */}
-            <div className='header'>
-                <div className='nav'>
-                    <div className='logo'>
-                        <img src={logoPNG} height={25} alt="logo" />
-                    </div>
-                    <div className='menus'>
-                        <ul className='menu'>
-                            <li>Ver um exemplo</li>
-                            <li>Sobre</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {/* page */}
-            <div className='page'>
-                <div className='central'>
-                    <div className='title'>
-                        <h1>Veja todas as disciplinas <br /> que você já cursou</h1>
-                    </div>
-                    <div className='description'>
-                        <h2>Carregue seu histórico escolar do SIGAA</h2>
-                    </div>
-                    <div className='upload-area'>
-                        <div className='method'>
-                            <input type="file" id="file-1" className="inputfile inputfile-1" accept='.pdf' onChange={getBase64} />
-                            <label htmlFor="file-1">
-                                {/*<svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-                  <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
-                  </path>
-                </svg>*/}
-                                <span>Escolher</span>
-                            </label>
-                        </div>
-                        <h4>- OU -</h4>
-                        <div className='method'>
-                            <input type="file" id="file-2" className="inputfile inputfile-2" accept='.pdf' onChange={getBase64} />
-                            <label id='dropFile' htmlFor="file-2">
-                                <img src={pdfPNG} height={65} alt="logo" />
-                                <span>Arraste o documento aqui</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    reader.onload = async () => {
+      const response = await sendHistory(reader.result)
+
+      if (response.status === 200) {
+        const disciplinas = response.body.materias
+        const sorted = sort(disciplinas, filter)
+
+        setDisciplinas(sorted)
+        setNumDisciplinas(sorted.length)
+        setIsLoaded(true)
+        setDescription('Histórico carregado:')
+      } else {
+        alert('Certifique se que o backend foi iniciado.')
+      }
+    }
+  }, [filter])
+
+  const getHistoryExample = () => {
+    const sorted = sort(null, filter)
+
+    setDisciplinas(sorted)
+    setNumDisciplinas(sorted.length)
+    setIsLoaded(true)
+    setDescription('Histórico carregado:')
+  }
+
+  const handleSort = (filter) => {
+    const sorted = sort(disciplinas, filter)
+
+    setFilter(filter)
+    setDisciplinas(sorted)
+    setNumDisciplinas(sorted.length)
+  }
+
+  const handleDrag = useCallback((e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    setDropText('Solte o documento aqui')
+    setIsDragging(true)
+  }, [])
+
+  const handleDrop = useCallback((e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      getHistoryResults(e.dataTransfer.files[0])
+      e.dataTransfer.clearData()
+    }
+
+    setDropText('Arraste o documento aqui')
+    setIsDragging(false)
+  }, [getHistoryResults])
+
+  useEffect(() => {
+    let dropFile = dropArea.current
+
+    if (dropFile) {
+      dropFile.addEventListener('dragover', handleDrag)
+      dropFile.addEventListener('drop', handleDrop)
+
+      setDescription('Carregue seu histórico escolar do SIGAA')
+      setDropText('Arraste o documento aqui')
+    }
+  }, [handleDrag, handleDrop])
+
+  return (
+    <div className='container'>
+      {/* header */}
+      <div className='header'>
+        <div className='nav'>
+          <div className='logo'>
+            <a href='/'>
+              <img src={logoPNG} height={25} alt='logo' />
+            </a>
+          </div>
+          <div className='menus'>
+            <ul className='menu'>
+              <li onClick={() => getHistoryExample('nome')}>Ver um exemplo</li>
+              <li>Sobre</li>
+            </ul>
+          </div>
         </div>
-    )
+      </div>
+
+      {/* page */}
+      <div className={`page ${isLoaded}`}>
+        <div className={`central ${isLoaded}`}>
+          <div className='title'>
+            <h1>Veja todas as disciplinas <br /> que você já cursou</h1>
+          </div>
+          <div className='description'>
+            <h2>{description}</h2>
+          </div>
+          {!isLoaded ?
+            <div className='upload-area'>
+              <div className='method'>
+                <input
+                  type='file'
+                  id='file-1'
+                  className='inputfile inputfile-1'
+                  accept='.pdf'
+                  onChange={(e) => getHistoryResults(e.target.files[0])}
+                />
+                <label htmlFor='file-1'>
+                  <span>Escolher</span>
+                </label>
+              </div>
+              <h4>- OU -</h4>
+              <div className='method'>
+                <div ref={dropArea} className={`inputfile-2 ${isDragging}`}>
+                  <img src={pdfPNG} height={65} alt='logo' />
+                  <span>{dropText}</span>
+                </div>
+              </div>
+            </div>
+          :
+            <div className='table'>
+              <div className='row header'>
+                <div className='cell' onClick={() => handleSort('nome')}>
+                  Disciplinas ({numDisciplinas})
+                  <Icon
+                    icon={filter === 'nome' ? caretUpFilled : caretDownFilled}
+                  />
+                </div>
+                <div className='cell' onClick={() => handleSort('periodo')}>
+                  Período
+                  <Icon
+                    icon={filter === 'periodo' ? caretUpFilled : caretDownFilled}
+                  />
+                </div>
+                <div className='cell' onClick={() => handleSort('mencao')}>
+                  Menção
+                  <Icon
+                    icon={filter === 'mencao' ? caretUpFilled : caretDownFilled}
+                  />
+                </div>
+              </div>
+              {disciplinas.map((disciplina, index) => (
+                <div key={index} className='row'>
+                  <div className='cell' data-title='Disciplina'>
+                    {disciplina.nome}
+                  </div>
+                  <div className='cell' data-title='Período'>
+                    {disciplina.periodo}
+                  </div>
+                  <div className='cell' data-title='Menção'>
+                    {disciplina.mencao}
+                  </div>
+                </div>
+              ))}
+            </div>
+          }
+          </div>
+      </div>
+    </div>
+  )
 }
 
 export default Home
