@@ -13,7 +13,9 @@
 Este projeto tem como objetivo ordenar as matérias realizadas pelo usuário, ignorando as reprovações de matérias. Foi utilizado o algoritmo de merge sort, porém com uma implementação customizada para apagar objetos duplicados. 
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+<img src='./assets/A.png'/>
+<img src='./assets/B.png'/>
+<img src='./assets/C.png'/>
 
 ## Instalação 
 **Linguagem**: Javascript<br>
