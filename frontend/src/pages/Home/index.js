@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
-import caretDownFilled from '@iconify/icons-ant-design/caret-down-filled'
+
 import caretUpFilled from '@iconify/icons-ant-design/caret-up-filled'
+import caretDownFilled from '@iconify/icons-ant-design/caret-down-filled'
+import closeCircleFilled from '@iconify/icons-ant-design/close-circle-filled'
 import { Icon } from '@iconify/react'
 
 import { sendHistory } from '../../utils/historyAPI'
@@ -20,6 +22,7 @@ const Home = () => {
   const [disciplinas, setDisciplinas] = useState([])
   const [numDisciplinas, setNumDisciplinas] = useState(0)
 
+  const [isModal, setIsModal] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -87,7 +90,7 @@ const Home = () => {
   }, [getHistoryResults])
 
   useEffect(() => {
-    let dropFile = dropArea.current
+    const dropFile = dropArea.current
 
     if (dropFile) {
       dropFile.addEventListener('dragover', handleDrag)
@@ -96,10 +99,14 @@ const Home = () => {
       setDescription('Carregue seu histórico escolar do SIGAA')
       setDropText('Arraste o documento aqui')
     }
+
+    const modal = parseInt(localStorage.getItem('modal')) ? false : true
+    setIsModal(modal)
   }, [handleDrag, handleDrop])
 
   return (
     <div className='container'>
+
       {/* header */}
       <div className='header'>
         <div className='nav'>
@@ -111,7 +118,7 @@ const Home = () => {
           <div className='menus'>
             <ul className='menu'>
               <li onClick={() => getHistoryExample('nome')}>Ver um exemplo</li>
-              <li>Sobre</li>
+              <li onClick={() => setIsModal(true)}>Sobre</li>
             </ul>
           </div>
         </div>
@@ -151,23 +158,29 @@ const Home = () => {
           :
             <div className='table'>
               <div className='row header'>
-                <div className='cell' onClick={() => handleSort('nome')}>
-                  Disciplinas ({numDisciplinas})
-                  <Icon
-                    icon={filter === 'nome' ? caretUpFilled : caretDownFilled}
-                  />
+                <div className='cell'>
+                  <button onClick={() => handleSort('nome')}>
+                    Disciplinas ({numDisciplinas})
+                    <Icon
+                      icon={filter === 'nome' ? caretUpFilled : caretDownFilled}
+                    />
+                  </button>
                 </div>
-                <div className='cell' onClick={() => handleSort('periodo')}>
-                  Período
-                  <Icon
-                    icon={filter === 'periodo' ? caretUpFilled : caretDownFilled}
-                  />
+                <div className='cell'>
+                  <button onClick={() => handleSort('periodo')}>
+                    Período
+                    <Icon
+                      icon={filter === 'periodo' ? caretUpFilled : caretDownFilled}
+                    />
+                  </button>
                 </div>
-                <div className='cell' onClick={() => handleSort('mencao')}>
-                  Menção
-                  <Icon
-                    icon={filter === 'mencao' ? caretUpFilled : caretDownFilled}
-                  />
+                <div className='cell'>
+                  <button onClick={() => handleSort('mencao')}>
+                    Menção
+                    <Icon
+                      icon={filter === 'mencao' ? caretUpFilled : caretDownFilled}
+                    />
+                  </button>
                 </div>
               </div>
               {disciplinas.map((disciplina, index) => (
@@ -186,6 +199,32 @@ const Home = () => {
             </div>
           }
           </div>
+      </div>
+
+      {/* modal */}
+      <div className={`modal-overlay ${isModal}`}>
+        <div className='modal'>
+          <div className='modal-header'>
+            <h5 className='modal-title'>Sobre</h5>
+            <Icon
+              icon={closeCircleFilled}
+              style={{ color: '#fff', fontSize: '25px' }}
+              onClick={() => {
+                localStorage.setItem('modal', '1')
+                setIsModal(false)
+              }}
+            />
+          </div>
+          <div className='modal-body'>
+            <p>
+              O MatériasRealizadas é apenas um projeto com o intuito de mostrar
+              uma aplicação prática do algoritmo MergeSort (Dividir e 
+              Conquistar). <br /><br />
+              Seu histórico é salvo apenas localmente e <b>não é 
+              compartilhado por ninguém.</b>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
